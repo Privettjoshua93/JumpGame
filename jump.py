@@ -1,3 +1,4 @@
+#2:28:42
 import pygame
 from sys import exit
 
@@ -41,6 +42,10 @@ player_stand = pygame.image.load('graphics/snail/bigzuck.png').convert_alpha()
 player_stand = pygame.transform.rotozoom(player_stand,0,3)
 player_stand_rect = player_stand.get_rect(center = (400,200))
 
+#Timer
+obstacle_timer = pygame.USEREVENT = 1
+pygame.time.set_timer(obstacle_timer,900)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,7 +67,11 @@ while True:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 game_active = True
                 zuck_rect.left = 800
-                start_time = pygame.time.get_ticks()  
+                start_time = pygame.time.get_ticks()
+            
+        if event.type == obstacle_timer and game_active:
+            print('h')
+
             
     if game_active:      
         screen.blit(sky_surf,((screen.get_width()/2-sky_surf.get_width()/2),0))
@@ -70,9 +79,9 @@ while True:
         score = display_score()
         display_title()
 
-        zuck_rect.x -= 4
-        if zuck_rect.right <=0: zuck_rect.left = 800
-        screen.blit(zuck_surf,zuck_rect)
+        #zuck_rect.x -= 4
+        #if zuck_rect.right <=0: zuck_rect.left = 800
+        #screen.blit(zuck_surf,zuck_rect)
 
         #player
         player_gravity += 1
