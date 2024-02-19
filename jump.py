@@ -7,6 +7,16 @@ def display_score():
     score_rect = score_surf.get_rect(center = (400,50))
     screen.blit(score_surf,score_rect)
 
+def display_title():
+    title_surf = test_font.render(f'JUMP THE ZUCK', False, (64,64,64))
+    title_rect = title_surf.get_rect(center = (130,40))
+    screen.blit(title_surf,title_rect)
+
+def display_guide():
+    guide_surf = test_font.render(f'Space to jump.', False, 'Black')
+    guide_rect = guide_surf.get_rect(center = (130,40))
+    screen.blit(guide_surf,guide_rect)
+
 pygame.init()
 screen = pygame.display.set_mode((800,400))
 pygame.display.set_caption('JUMP THE ZUCK')
@@ -18,9 +28,6 @@ start_time = 0
 sky_surf = pygame.image.load('graphics/Sky.png').convert()
 ground_surf = pygame.image.load('graphics/ground.png').convert()
 
-score_surf = test_font.render('JUMP THE ZUCK', False, "#2a8c1c")
-score_rect = score_surf.get_rect(center = (400,50))
-
 zuck_surf = pygame.image.load('graphics/snail/zuck1.png').convert_alpha()
 zuck_rect = zuck_surf.get_rect(bottomright = (600,300))
 
@@ -29,10 +36,9 @@ player_rect = player_surf.get_rect(midbottom = (80,300))
 player_gravity = 20
 
 #Intro screen
-player_stand = pygame.image.load('graphics/player/player_stand.png').convert_alpha()
-player_stand = pygame.transform.scale(player_stand,(200,400))
+player_stand = pygame.image.load('graphics/snail/bigzuck.png').convert_alpha()
+player_stand = pygame.transform.rotozoom(player_stand,0,3)
 player_stand_rect = player_stand.get_rect(center = (400,200))
-
 
 while True:
     for event in pygame.event.get():
@@ -61,6 +67,7 @@ while True:
         screen.blit(sky_surf,((screen.get_width()/2-sky_surf.get_width()/2),0))
         screen.blit(ground_surf,(0,300))
         display_score()
+        display_title()
 
         zuck_rect.x -= 4
         if zuck_rect.right <=0: zuck_rect.left = 800
@@ -78,6 +85,7 @@ while True:
     else:
         screen.fill((84,129,162))
         screen.blit(player_stand,player_stand_rect)
+        display_guide()
 
     pygame.display.update()
     clock.tick(60)
