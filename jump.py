@@ -30,6 +30,7 @@ player_gravity = 20
 
 #Intro screen
 player_stand = pygame.image.load('graphics/player/player_stand.png').convert_alpha()
+player_stand = pygame.transform.scale(player_stand,(200,400))
 player_stand_rect = player_stand.get_rect(center = (400,200))
 
 
