@@ -6,9 +6,10 @@ def display_score():
     score_surf = test_font.render(f'Score: {current_time}',False,(64,64,64))
     score_rect = score_surf.get_rect(center = (400,50))
     screen.blit(score_surf,score_rect)
+    return current_time
 
 def display_title():
-    title_surf = test_font.render(f'JUMP THE ZUCK', False, (64,64,64))
+    title_surf = test_font.render(f'JUMP THE ZUCK', False, ('Black'))
     title_rect = title_surf.get_rect(center = (130,40))
     screen.blit(title_surf,title_rect)
 
@@ -66,7 +67,7 @@ while True:
     if game_active:      
         screen.blit(sky_surf,((screen.get_width()/2-sky_surf.get_width()/2),0))
         screen.blit(ground_surf,(0,300))
-        display_score()
+        score = display_score()
         display_title()
 
         zuck_rect.x -= 4
@@ -85,7 +86,10 @@ while True:
     else:
         screen.fill((84,129,162))
         screen.blit(player_stand,player_stand_rect)
+        score_message = test_font.render(f'Your score: {score}', False, ('Black'))
+        score_message_rect = score_message.get_rect(center = (670, 40))
+        screen.blit(score_message,score_message_rect)
         display_guide()
-
+        
     pygame.display.update()
     clock.tick(60)
